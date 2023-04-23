@@ -14,7 +14,8 @@ namespace ConsoleApp
             {
                 new RabinKarp(),
                 new Brutforce(),
-                new BoyerMoor()
+                new BoyerMoor(),
+                new KnutMorisPrat()
             };
             foreach(var searcher in searchers)
             {
@@ -24,7 +25,7 @@ namespace ConsoleApp
         static void SubstringSearcherPerformanceTest(ISustringSearcher searcher)
         {
             var str = File.ReadAllText("WarAndWorld.txt");
-            var subStr = shortSubstring;
+            var subStr = mediumSubstring;
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();

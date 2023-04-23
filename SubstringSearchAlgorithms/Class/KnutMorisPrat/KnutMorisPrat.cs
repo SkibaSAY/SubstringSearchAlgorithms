@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SubstringSearchAlgorithms.Class.KnutMorisPrat;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SubstringSearchAlgorithms.Class.KnutMorisPrat
+namespace SubstringSearchAlgorithms
 {
     public class KnutMorisPrat : ISustringSearcher
     {
@@ -28,6 +29,7 @@ namespace SubstringSearchAlgorithms.Class.KnutMorisPrat
                     {
                         var currIndex = i - subLen + 1;
                         result.Add(currIndex);
+                        currLen = 0;
                     }
                 }
                 else
