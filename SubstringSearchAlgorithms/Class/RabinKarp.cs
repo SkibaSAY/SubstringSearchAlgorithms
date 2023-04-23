@@ -17,7 +17,12 @@ namespace SubstringSearchAlgorithms.Class
             var foundedIndxs = new List<int>();
             var n = str.Length;
             var m = substring.Length;
+
             var _helpSdvig = (m - 1) * toNextSdvig - 1;
+            if (m <= 1)
+            {
+                _helpSdvig = 0;
+            } 
 
             var preparedResult = 0;
 
@@ -29,7 +34,7 @@ namespace SubstringSearchAlgorithms.Class
             }
 
             var tempResult = 0;
-            for(var i = 0; i < n; i++)
+            for(var i = startIndex; i < n; i++)
             {
                 var next = (int)str[i];
                 tempResult = ComputeSubstringRateNext(next, tempResult, _helpSdvig);
