@@ -13,9 +13,42 @@ namespace SubstringSearchAlgorithms.Class
 
         public int[] IndexOf(string str, int startIndex, string substring)
         {
+            var result = new List<int>();
             FillStopSymbols(substring);
             FillSuffixTable(substring);
-            return new int[0];
+            int i = substring.Length - 1;
+            int strLength = str.Length;
+            int substrLength = substring.Length;
+            while(i < strLength - substrLength)
+            {
+                if (!substring.Contains(str[i]))
+                {
+                    i += substrLength;
+                    continue;
+                }
+                int indexInSubstring = substrLength - 1;
+                while (substring[indexInSubstring] == str[i])
+                {
+                    if (indexInSubstring == 0)
+                    {
+                        result.Add(i);
+                        var stop = stopSymbolsTable[substring[substrLength - 1]];
+                        var suffix = suffixTable[substring];
+                        i += Math.Max(stop, suffix);
+                        break;
+                    }
+                    indexInSubstring--;
+                    i--;
+                    
+                }
+                if(indexInSubstring != 0)
+                {
+                    var suffix = suffixTable[substring.Substring(indexInSubstring+1)];
+                    var stop = stopSymbolsTable[substring[indexInSubstring]];
+                    i+= Math.Max(stop, suffix);
+                }
+            }
+            return result.ToArray();
         }
 
         private void FillStopSymbols(string pattern)
