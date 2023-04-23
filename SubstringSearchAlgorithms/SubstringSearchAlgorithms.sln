@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31829.152
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubstringSearchAlgorithms", "SubstringSearchAlgorithms.csproj", "{2A19B9DA-7D1B-4009-AF7F-1FCDEB89992C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "..\TestProject\TestProject.csproj", "{F31E5063-429B-45EF-A74D-5A76CB8C7C8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "..\TestProject\TestProject.csproj", "{F31E5063-429B-45EF-A74D-5A76CB8C7C8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "..\ConsoleApp\ConsoleApp.csproj", "{289824A3-B4A2-4818-8248-F7558DF91532}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F31E5063-429B-45EF-A74D-5A76CB8C7C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F31E5063-429B-45EF-A74D-5A76CB8C7C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F31E5063-429B-45EF-A74D-5A76CB8C7C8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{289824A3-B4A2-4818-8248-F7558DF91532}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{289824A3-B4A2-4818-8248-F7558DF91532}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{289824A3-B4A2-4818-8248-F7558DF91532}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{289824A3-B4A2-4818-8248-F7558DF91532}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
