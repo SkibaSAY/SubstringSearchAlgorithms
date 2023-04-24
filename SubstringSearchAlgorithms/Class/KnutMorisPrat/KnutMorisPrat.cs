@@ -30,6 +30,7 @@ namespace SubstringSearchAlgorithms
                         var currIndex = i - subLen + 1;
                         result.Add(currIndex);
                         currLen = 0;
+                        i = currIndex;
                     }
                 }
                 else
