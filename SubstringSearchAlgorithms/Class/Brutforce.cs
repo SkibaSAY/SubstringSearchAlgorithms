@@ -14,7 +14,7 @@ namespace SubstringSearchAlgorithms.Class
             int n = str.Length;
             int m = substring.Length;
 
-            for(int i = startIndex; i < n - m; i++)
+            for(int i = startIndex; i <= n - m; i++)
             {
                 var curSubstring = str.Substring(i, m);
                 if(curSubstring == substring)
