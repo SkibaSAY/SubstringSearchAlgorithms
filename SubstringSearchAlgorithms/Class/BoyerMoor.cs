@@ -34,7 +34,15 @@ namespace SubstringSearchAlgorithms.Class
                     {
                         result.Add(k);
                         var stop = stopSymbolsTable[substring[substrLength - 1]];
-                        var suffix = suffixTable[substring];
+                        var suffix = 0;
+                        if (!suffixTable.ContainsKey(substring))
+                        {
+                            suffix = substrLength;
+                        }
+                        else
+                        {
+                            suffix = suffixTable[substring];
+                        }
                         i += Math.Max(stop, suffix);
                         indexInSubstring = -1;
                         break;
@@ -45,11 +53,18 @@ namespace SubstringSearchAlgorithms.Class
                 }
                 if(indexInSubstring >= 0)
                 {
-                    var suffix = suffixTable[substring.Substring(indexInSubstring+1)];
-                    var stop = 0;
-
+                    var curSuffix = substring.Substring(indexInSubstring + 1);
+                    var suffix = 0;
+                    if (!suffixTable.ContainsKey(curSuffix))
+                    {
+                        suffix = substrLength;
+                    }
+                    else
+                    {
+                        suffix = suffixTable[substring.Substring(indexInSubstring + 1)];
+                    }
                     if (k != i) k++;
-                    stop = stopSymbolsTable[str[k]];
+                    var stop = stopSymbolsTable[str[k]];
                     i+= Math.Max(stop, suffix);
                 }
             }
@@ -91,7 +106,7 @@ namespace SubstringSearchAlgorithms.Class
                     suffixTable.Add(suffix, patternLength);
                     i++;
                     predSuffix = suffix;
-                    continue;
+                    break;
                 }
                 trimPattern = trimPattern.Remove(trimPattern.Length-1);
                 if (!trimPattern.Contains(suffix))
