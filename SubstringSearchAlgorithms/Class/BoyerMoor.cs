@@ -20,8 +20,7 @@ namespace SubstringSearchAlgorithms.Class
             int strLength = str.Length;
             int substrLength = substring.Length;
 
-            int border = strLength - substrLength + 1;
-            while (i <= border)
+            while (i < strLength)
             {
                 if (!substring.Contains(str[i]))
                 {
