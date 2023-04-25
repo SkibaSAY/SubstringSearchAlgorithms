@@ -19,13 +19,29 @@ namespace ConsoleApp
             };
             foreach(var searcher in searchers)
             {
-                SubstringSearcherPerformanceTest(searcher);
+                SubstringSearcherPerformanceTestAnna(searcher);
             }
         }
+        static void SubstringSearcherPerformanceTestAnna(ISustringSearcher searcher)
+        {
+            var str = File.ReadAllText("anna.txt");
+            var subStr = shortSubstring;
+
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            var idxs = searcher.IndexOf(str, 0, subStr);
+
+            stopWatch.Stop();
+
+            Console.WriteLine($"{searcher.GetType().Name}: time: {stopWatch.ElapsedMilliseconds}, founded: {idxs.Length}");
+        }
+        static string substring = "на";
+
         static void SubstringSearcherPerformanceTest(ISustringSearcher searcher)
         {
             var str = File.ReadAllText("WarAndWorld.txt");
-            var subStr = shortSubstring1;
+            var subStr = shortSubstring;
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -39,7 +55,7 @@ namespace ConsoleApp
 
         static string veryShortSubstring = "и";
 
-        static string shortSubstring = "Андрей";
+        static string shortSubstring = "Наташа";
         static string shortSubstring1 = "Шерер";
         static string shortSubstring2 = "Князь Андрей Болконский";
 

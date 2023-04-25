@@ -1,6 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SubstringSearchAlgorithms;
 using SubstringSearchAlgorithms.Class;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace TestProject
 {
@@ -79,5 +83,37 @@ namespace TestProject
                 Assert.AreEqual(expected, result);
             }
         }
+
+        [TestMethod]
+        public void SearchBagOfWordsOnAnnaTxt()
+        {
+            var algms = GetSearchers();
+            string text;
+            using (var sr = new StreamReader("anna.txt", Encoding.UTF8))
+            {
+                text = sr.ReadToEnd().ToLower();
+            }
+
+            int number = 100;
+            Regex rg = new Regex(@"\w+");
+            var bag = new HashSet<string>();
+            var matches = rg.Matches(text);
+            foreach (var match in matches)
+            {
+                bag.Add(match.ToString());
+                if (bag.Count > number) break;
+            }
+            foreach (var pattern in bag)
+            {
+                var BF = algms[1];
+                var expected = BF.IndexOf(text, 0, pattern);
+                foreach (var algm in algms)
+                {
+                    var actual = algm.IndexOf(text, 0, pattern);
+                    CollectionAssert.AreEqual(expected, actual);
+                }
+            }
+        }
+
     }
 }

@@ -13,6 +13,9 @@ namespace SubstringSearchAlgorithms.Class
 
         public int[] IndexOf(string str, int startIndex, string substring)
         {
+            stopSymbolsTable = new Dictionary<char, int>();
+            suffixTable = new Dictionary<string, int>();
+
             var result = new List<int>();
             FillStopSymbols(substring);
             FillSuffixTable(substring);

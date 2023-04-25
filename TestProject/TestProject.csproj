@@ -17,4 +17,10 @@
     <ProjectReference Include="..\SubstringSearchAlgorithms\SubstringSearchAlgorithms.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="anna.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
