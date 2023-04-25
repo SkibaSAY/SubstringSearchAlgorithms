@@ -31,8 +31,6 @@ namespace SubstringSearchAlgorithms.Class.KnutMorisPrat
                 result[i] = suffixLen;
             }
 
-            var a = result.ToList().Where(x => x != 0).Count();
-
             return result;
         }
     }

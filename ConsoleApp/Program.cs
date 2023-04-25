@@ -25,7 +25,7 @@ namespace ConsoleApp
         static void SubstringSearcherPerformanceTest(ISustringSearcher searcher)
         {
             var str = File.ReadAllText("WarAndWorld.txt");
-            var subStr = mediumSubstring;
+            var subStr = shortSubstring1;
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -41,6 +41,7 @@ namespace ConsoleApp
 
         static string shortSubstring = "Андрей";
         static string shortSubstring1 = "Шерер";
+        static string shortSubstring2 = "Князь Андрей Болконский";
 
         static string mediumSubstring = @"Приехав в Петербург, Пьер никого не известил о своем приезде, никуда не выезжал и стал целые дни проводить за чтением Фомы Кемпийского, книги, которая неизвестно кем была доставлена ему. Одно и все одно понимал Пьер, читая эту книгу: он понимал неизведанное еще им наслаждение верить в возможность достижения совершенства и в возможность братской и деятельной любви между людьми, открытую ему Осипом Алексеевичем. Через неделю после его приезда молодой польский граф Вилларский, которого Пьер поверхностно знал по петербургскому свету, вошел вечером в его комнату с тем официальным и торжественным видом, с которым входил к нему секундант Долохова, и, затворив за собой дверь и убедившись, что в комнате никого, кроме Пьера, не было, обратился к нему.
 
