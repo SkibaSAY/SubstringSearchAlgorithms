@@ -19,7 +19,7 @@ namespace ConsoleApp
                 new Brutforce(),
                 new BoyerMoor(),
                 new KnutMorisPrat(),
-                //new SuperBrutForce()
+                new SuperBrutForce()
             };
             foreach(var searcher in searchers)
             {
@@ -60,7 +60,7 @@ namespace ConsoleApp
         static void SubstringSearcherPerformanceTest(ISustringSearcher searcher)
         {
             var str = File.ReadAllText("WarAndWorld.txt");
-            var subStr = mediumSubstring;
+            var subStr = shortSubstring1;
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
