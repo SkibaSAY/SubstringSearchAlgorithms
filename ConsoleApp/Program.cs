@@ -60,7 +60,7 @@ namespace ConsoleApp
         static void SubstringSearcherPerformanceTest(ISustringSearcher searcher)
         {
             var str = File.ReadAllText("WarAndWorld.txt");
-            var subStr = mediumSubstring;
+            var subStr = shortSubstring2;
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();

@@ -22,6 +22,10 @@ namespace SubstringSearchAlgorithms.Class
             int i = substring.Length - 1;
             int strLength = str.Length;
             int substrLength = substring.Length;
+            var stopLastInSubstr = stopSymbolsTable[substring[substrLength - 1]];
+            var suffixOfSubstr = substrLength;
+            if (suffixTable.ContainsKey(substring)) suffixOfSubstr = suffixTable[substring];
+            var addingIndex = Math.Max(stopLastInSubstr, suffixOfSubstr);
 
             while (i < strLength)
             {
@@ -37,33 +41,18 @@ namespace SubstringSearchAlgorithms.Class
                     if (indexInSubstring == 0)
                     {
                         result.Add(k);
-                        var stop = stopSymbolsTable[substring[substrLength - 1]];
-                        var suffix = 0;
-                        if (!suffixTable.ContainsKey(substring))
-                        {
-                            suffix = substrLength;
-                        }
-                        else
-                        {
-                            suffix = suffixTable[substring];
-                        }
-                        i += Math.Max(stop, suffix);
+                        i += addingIndex;
                         indexInSubstring = -1;
                         break;
                     }
                     indexInSubstring--;
-                    k--;
-                    
+                    k--; 
                 }
                 if(indexInSubstring >= 0)
                 {
                     var curSuffix = substring.Substring(indexInSubstring + 1);
-                    var suffix = 0;
-                    if (!suffixTable.ContainsKey(curSuffix))
-                    {
-                        suffix = substrLength;
-                    }
-                    else
+                    var suffix = substrLength;
+                    if (suffixTable.ContainsKey(curSuffix))
                     {
                         suffix = suffixTable[substring.Substring(indexInSubstring + 1)];
                     }
@@ -98,44 +87,47 @@ namespace SubstringSearchAlgorithms.Class
             var suffix = "";
             suffixTable.Add(suffix, 1);
             var patternLength = pattern.Length;
-  
-            var trimPattern = pattern;
+            var patternMinus1 = pattern.Substring(0, patternLength - 1);
+
             var predSuffix = "";
-            int i = 1;
+            var trimPattern = pattern;
+            int currentIndex = patternLength - 1;
             while (suffix != pattern)
             {
-                suffix = pattern[patternLength - i] + suffix;
-                if (suffixTable[predSuffix] == patternLength)
-                {
-                    suffixTable.Add(suffix, patternLength);
-                    i++;
-                    predSuffix = suffix;
-                    break;
-                }
+                suffix = pattern[currentIndex] + suffix;
                 trimPattern = trimPattern.Remove(trimPattern.Length-1);
                 if (!trimPattern.Contains(suffix))
                 {
-                    var littleString = suffix.Substring(1, suffix.Length - 1);
-                    var littlePattern = pattern.Substring(0, patternLength - 1);
+                    var littleString = predSuffix;
+
                     while (littleString != "")
                     {
-                        if (littlePattern.StartsWith(littleString)) break;
+                        if (patternMinus1.StartsWith(littleString)) break;
                         littleString = littleString.Remove(0, 1);
                     }
                     suffixTable.Add(suffix, patternLength - littleString.Length); 
                 }
                 else
                 {
-                    var littleString = trimPattern.Substring(trimPattern.Length - suffix.Length);
-                    for(int j = trimPattern.Length - suffix.Length - 1; j >= 0; j--)
+                    var littleString = trimPattern;
+                    int position = littleString.IndexOf(suffix);
+                    int suffxLength = suffix.Length;
+                    int newPosition = position;
+                    while (littleString.Length >= suffxLength)
                     {
-                        if (littleString.StartsWith(suffix)) break;
-                        littleString = trimPattern[j] + littleString;
+                        littleString = littleString.Remove(0, newPosition + 1);
+                        newPosition = littleString.IndexOf(suffix);
+                        if (newPosition > 0) position += newPosition + 1;
+                        else break;
                     }
-                    suffixTable.Add(suffix, littleString.Length);
+                    suffixTable.Add(suffix, suffxLength - position);
                 }
-                i++;
-                predSuffix = suffix;
+                if (suffixTable[suffix] == patternLength)
+                {
+                    break;
+                }
+                currentIndex--;
+                predSuffix = suffix[0] + predSuffix;
             }
         }
     }
