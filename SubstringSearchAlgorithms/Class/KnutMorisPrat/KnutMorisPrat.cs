@@ -12,7 +12,7 @@ namespace SubstringSearchAlgorithms
         public int[] IndexOf(string str, int startIndex, string substring)
         {
             var result = new List<int>();
-            var prefFunc = PrefixFunction<char>.BuildPrefixFunction(str.ToArray());
+            var prefFunc = PrefixFunction<char>.BuildPrefixFunction(substring.ToArray());
 
             var len = str.Length;
             var subLen = substring.Length;
@@ -35,9 +35,10 @@ namespace SubstringSearchAlgorithms
                 }
                 else
                 {
-                    while(currLen > 0)
+                    if(currLen > 0)
                     {
                         currLen = prefFunc[currLen - 1];
+                        i--;
                     }
                 }
             }

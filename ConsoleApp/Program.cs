@@ -1,8 +1,11 @@
 ﻿using SubstringSearchAlgorithms;
 using SubstringSearchAlgorithms.Class;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ConsoleApp
 {
@@ -20,28 +23,43 @@ namespace ConsoleApp
             foreach(var searcher in searchers)
             {
                 SubstringSearcherPerformanceTestAnna(searcher);
+                //SubstringSearcherPerformanceTest(searcher);
             }
         }
         static void SubstringSearcherPerformanceTestAnna(ISustringSearcher searcher)
         {
-            var str = File.ReadAllText("anna.txt");
-            var subStr = shortSubstring;
+            string text;
+            using (var sr = new StreamReader("anna.txt", Encoding.UTF8))
+            {
+                text = sr.ReadToEnd().ToLower();
+            }
+
+            int number = 100;
+            Regex rg = new Regex(@"\w+");
+            var bag = new HashSet<string>();
+            var matches = rg.Matches(text);
+            foreach (var match in matches)
+            {
+                bag.Add(match.ToString());
+                if (bag.Count > number) break;
+            }
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-
-            var idxs = searcher.IndexOf(str, 0, subStr);
-
+            var count = 0;
+            foreach (var pattern in bag)
+            {
+                var actual = searcher.IndexOf(text, 0, pattern);
+                count += actual.Length;
+            }
             stopWatch.Stop();
-
-            Console.WriteLine($"{searcher.GetType().Name}: time: {stopWatch.ElapsedMilliseconds}, founded: {idxs.Length}");
+            Console.WriteLine($"{searcher.GetType().Name}: time: {stopWatch.ElapsedMilliseconds}, founded: {count}");
         }
-        static string substring = "на";
 
         static void SubstringSearcherPerformanceTest(ISustringSearcher searcher)
         {
             var str = File.ReadAllText("WarAndWorld.txt");
-            var subStr = shortSubstring;
+            var subStr = annaSubstring;
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -54,7 +72,7 @@ namespace ConsoleApp
         }
 
         static string veryShortSubstring = "и";
-
+        static string annaSubstring = "на";
         static string shortSubstring = "Наташа";
         static string shortSubstring1 = "Шерер";
         static string shortSubstring2 = "Князь Андрей Болконский";

@@ -10,4 +10,10 @@
     <None Remove="packages\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="anna.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -105,7 +105,7 @@ namespace TestProject
             }
             foreach (var pattern in bag)
             {
-                var BF = algms[1];
+                var BF = new Brutforce();
                 var expected = BF.IndexOf(text, 0, pattern);
                 foreach (var algm in algms)
                 {
