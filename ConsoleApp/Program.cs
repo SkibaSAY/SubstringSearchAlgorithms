@@ -18,12 +18,13 @@ namespace ConsoleApp
                 new RabinKarp(),
                 new Brutforce(),
                 new BoyerMoor(),
-                new KnutMorisPrat()
+                new KnutMorisPrat(),
+                //new SuperBrutForce()
             };
             foreach(var searcher in searchers)
             {
-                SubstringSearcherPerformanceTestAnna(searcher);
-                //SubstringSearcherPerformanceTest(searcher);
+                //SubstringSearcherPerformanceTestAnna(searcher);
+                SubstringSearcherPerformanceTest(searcher);
             }
         }
         static void SubstringSearcherPerformanceTestAnna(ISustringSearcher searcher)
@@ -59,7 +60,7 @@ namespace ConsoleApp
         static void SubstringSearcherPerformanceTest(ISustringSearcher searcher)
         {
             var str = File.ReadAllText("WarAndWorld.txt");
-            var subStr = annaSubstring;
+            var subStr = mediumSubstring;
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
