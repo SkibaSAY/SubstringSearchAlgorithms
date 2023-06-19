@@ -89,7 +89,6 @@ namespace SubstringSearchAlgorithms.Class
             var patternLength = pattern.Length;
             var patternMinus1 = pattern.Substring(0, patternLength - 1);
 
-            var predSuffix = "";
             var trimPattern = pattern;
             int currentIndex = patternLength - 1;
             while (suffix != pattern)
@@ -98,36 +97,25 @@ namespace SubstringSearchAlgorithms.Class
                 trimPattern = trimPattern.Remove(trimPattern.Length-1);
                 if (!trimPattern.Contains(suffix))
                 {
-                    var littleString = predSuffix;
+                    var littleString = (patternMinus1.Length == 0 || suffix.IndexOf(patternMinus1[0]) < 0) ? "" : suffix.Remove(0, suffix.IndexOf(patternMinus1[0]));
 
                     while (littleString != "")
                     {
                         if (patternMinus1.StartsWith(littleString)) break;
                         littleString = littleString.Remove(0, 1);
+                        littleString = littleString.IndexOf(patternMinus1[0]) < 0 ? "" :littleString.Remove(0, littleString.IndexOf(patternMinus1[0]));
                     }
                     suffixTable.Add(suffix, patternLength - littleString.Length); 
                 }
                 else
                 {
-                    var littleString = trimPattern;
-                    int position = littleString.IndexOf(suffix);
-                    int suffxLength = suffix.Length;
-                    int newPosition = position;
-                    while (littleString.Length >= suffxLength)
-                    {
-                        littleString = littleString.Remove(0, newPosition + 1);
-                        newPosition = littleString.IndexOf(suffix);
-                        if (newPosition > 0) position += newPosition + 1;
-                        else break;
-                    }
-                    suffixTable.Add(suffix, suffxLength - position);
+                    suffixTable.Add(suffix, trimPattern.Length - trimPattern.LastIndexOf(suffix));
                 }
                 if (suffixTable[suffix] == patternLength)
                 {
                     break;
                 }
                 currentIndex--;
-                predSuffix = suffix[0] + predSuffix;
             }
         }
     }
