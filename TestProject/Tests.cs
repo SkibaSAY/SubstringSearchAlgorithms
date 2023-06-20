@@ -70,6 +70,21 @@ namespace TestProject
         }
 
         [TestMethod]
+        public void Test_abcbbacaabdaccaca_ca()
+        {
+            var searchers = GetSearchers();
+            var str = "abcbbacaabdaccaca";
+            var substring = "ca";
+            var expected = "6,13,15";
+            foreach (var searcher in searchers)
+            {
+                var indxs = searcher.IndexOf(str, 0, substring);
+                var result = string.Join(",", indxs);
+                Assert.AreEqual(expected, result);
+            }
+        }
+
+        [TestMethod]
         public void Test_kalambur_notContains()
         {
             var searchers = GetSearchers();
